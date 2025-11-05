@@ -1,0 +1,360 @@
+[
+  {
+    "description": "  As a test engineer I want to simulate the orders API returning 404 so the UI shows the \"no orders\" message",
+    "elements": [
+      {
+        "description": "",
+        "id": "api-intercept---orders-404;force-orders-api-to-return-404-and-validate-ui-message",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Force orders API to return 404 and validate UI message",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I open the application",
+            "match": {
+              "location": "step-definitions\\APIStepDefinitions\\apiintercepter.step.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6786507700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "I login with alias \"qalearningrepository\"",
+            "match": {
+              "location": "step-definitions\\APIStepDefinitions\\apiintercepter.step.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 775013600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "I intercept the orders API to return 404",
+            "match": {
+              "location": "step-definitions\\APIStepDefinitions\\apiintercepter.step.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6412299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I click the Orders link",
+            "match": {
+              "location": "step-definitions\\APIStepDefinitions\\apiintercepter.step.js:97"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 319733400
+            },
+            "embeddings": [
+              {
+                "data": "ewogICJyZXF1ZXN0IjogewogICAgInVybCI6ICJodHRwczovL3JhaHVsc2hldHR5YWNhZGVteS5jb20vYXBpL2Vjb20vb3JkZXIvZ2V0LW9yZGVycy1mb3ItY3VzdG9tZXIvNjg4ZjE2M2I2ZjU4NWViNjBkNThjNTJjIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJoZWFkZXJzIjogewogICAgICAiYWNjZXB0IjogImFwcGxpY2F0aW9uL2pzb24sIHRleHQvcGxhaW4sICovKiIsCiAgICAgICJhdXRob3JpemF0aW9uIjogImV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpmYVdRaU9pSTJPRGhtTVRZellqWm1OVGcxWldJMk1HUTFPR00xTW1NaUxDSjFjMlZ5UlcxaGFXd2lPaUp4WVd4bFlYSnVhVzVuY21Wd2IzTnBkRzl5ZVVCbmJXRnBiQzVqYjIwaUxDSjFjMlZ5VFc5aWFXeGxJam94TWpNME5UWTNPRGt4TENKMWMyVnlVbTlzWlNJNkltTjFjM1J2YldWeUlpd2lhV0YwSWpveE56WXlNRFkwT1RZeUxDSmxlSEFpT2pFM09UTTJNakkxTmpKOS5hTmh1bVQ5THFCQUs3cVN0NVdvR2FjU05PQ2h1dmtLN3lWVTF6d3Q0eEdBIiwKICAgICAgInJlZmVyZXIiOiAiaHR0cHM6Ly9yYWh1bHNoZXR0eWFjYWRlbXkuY29tL2NsaWVudC8iLAogICAgICAidXNlci1hZ2VudCI6ICJNb3ppbGxhLzUuMCAoV2luZG93cyBOVCAxMC4wOyBXaW42NDsgeDY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTQwLjAuMC4wIFNhZmFyaS81MzcuMzYiLAogICAgICAic2VjLWNoLXVhIjogIlwiQ2hyb21pdW1cIjt2PVwiMTQwXCIsIFwiTm90PUE/QnJhbmRcIjt2PVwiMjRcIiwgXCJHb29nbGUgQ2hyb21lXCI7dj1cIjE0MFwiIiwKICAgICAgInNlYy1jaC11YS1tb2JpbGUiOiAiPzAiLAogICAgICAic2VjLWNoLXVhLXBsYXRmb3JtIjogIlwiV2luZG93c1wiIgogICAgfSwKICAgICJwb3N0RGF0YSI6IG51bGwKICB9LAogICJyZXNwb25zZSI6IHsKICAgICJzdGF0dXMiOiA0MDQsCiAgICAiaGVhZGVycyI6IHsKICAgICAgIkNvbnRlbnQtVHlwZSI6ICJhcHBsaWNhdGlvbi9qc29uIgogICAgfSwKICAgICJib2R5IjogewogICAgICAibWVzc2FnZSI6ICJObyBvcmRlcnMgLSBmb3JjZWQgNDA0IGJ5IHRlc3QiCiAgICB9CiAgfQp9",
+                "mime_type": "application/json"
+              }
+            ]
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "I should see the no-orders message \"You have No Orders to show at this time. Please Visit Back Us\"",
+            "match": {
+              "location": "step-definitions\\APIStepDefinitions\\apiintercepter.step.js:112"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20828805899
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "api-intercept---orders-404",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "API Intercept - Orders 404",
+    "tags": [],
+    "uri": "features\\APIFeature\\apintercepter.feature"
+  },
+  {
+    "description": "  As a user\n  I want to login to the client portal\n  So that I can access my account",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-functionality;successful-login-with-valid-credentials",
+        "keyword": "Scenario Outline",
+        "line": 14,
+        "name": "Successful login with valid credentials",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the login page",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\login.steps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11523980799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I enter username \"qalearningrepository\" and password \"unused\"",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\login.steps.js:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 580498899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I click on the login button",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\login.steps.js:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 161363199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I should be redirected to the dashboard",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\login.steps.js:54"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2593202300
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-functionality",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Login Functionality",
+    "tags": [],
+    "uri": "features\\UIFeature\\login.feature"
+  },
+  {
+    "description": "  As a user\n  I want to order a product and complete the purchase\n  So that I can validate the order flow",
+    "elements": [
+      {
+        "description": "",
+        "id": "product-order;order-adidas-original-and-validate-order-completion",
+        "keyword": "Scenario Outline",
+        "line": 23,
+        "name": "Order ADIDAS ORIGINAL and validate order completion",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the login page",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\login.steps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8904371399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I enter username \"qalearningrepository\" and password \"unused\"",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\login.steps.js:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 578510799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I click on the login button",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\login.steps.js:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 170321100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I add product \"ADIDAS ORIGINAL\" to the cart",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1149281100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I go to the cart",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1324909500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "I should see product \"ADIDAS ORIGINAL\" in the cart",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:57"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 515195800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "I click on the checkout button",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:68"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 199415899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "I select country as \"India\"",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:80"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1142231999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I place the order",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 226722400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "I should see the message \"Thankyou for the order.\"",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 509421999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "I pick the order id",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:114"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24337099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "I go to the Orders History page",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:124"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 229249700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "I should see the order in history",
+            "match": {
+              "location": "step-definitions\\UIStepDefinitions\\productOrder.steps.js:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1264210299
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "product-order",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Product Order",
+    "tags": [],
+    "uri": "features\\UIFeature\\productOrder.feature"
+  }
+]

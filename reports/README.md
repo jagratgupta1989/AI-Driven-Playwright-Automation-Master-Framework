@@ -1,0 +1,1 @@
+This folder will contain generated test reports. After running tests, open `cucumber-report.html` for the latest report.
