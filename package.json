@@ -1,6 +1,6 @@
 {
   "scripts": {
-  "test": "cucumber-js --config cucumber.js && node ./utils/reporter.js",
+  "test": "npx cucumber-js --config cucumber.js && node ./utils/reporter.js",
     "allure:generate": "npx allure generate allure-results -o reports/allure-report --clean",
     "allure:open": "npx allure open reports/allure-report",
     "report": "node ./utils/reporter.js",
