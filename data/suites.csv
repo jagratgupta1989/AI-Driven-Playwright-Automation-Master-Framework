@@ -1,0 +1,8 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"As a test engineer I want to simulate the orders API returning 404 so the UI shows the ""no orders"" message","73581","Force orders API to return 404 and validate UI message","","Wed Nov 05 13:30:32 UTC 2025","passed","Wed Nov 05 13:31:45 UTC 2025","","","",""
+"As a user
+  I want to order a product and complete the purchase
+  So that I can validate the order flow","34715","Order ADIDAS ORIGINAL and validate order completion","","Wed Nov 05 13:32:06 UTC 2025","passed","Wed Nov 05 13:32:40 UTC 2025","","","",""
+"As a user
+  I want to login to the client portal
+  So that I can access my account","20178","Successful login with valid credentials","","Wed Nov 05 13:31:45 UTC 2025","passed","Wed Nov 05 13:32:06 UTC 2025","","","",""
