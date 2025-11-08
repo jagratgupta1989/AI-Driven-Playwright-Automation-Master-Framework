@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write  # ✅ required for GitHub Pages deployment
+
 jobs:
   test:
     runs-on: ubuntu-latest
