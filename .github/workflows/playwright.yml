@@ -33,7 +33,7 @@ jobs:
       # Step 5: Run Playwright + Cucumber Tests
       - name: Run Playwright + Cucumber tests
         run: |
-          npx cucumber-js --require-module @babel/register --require tests/steps/**/*.js --publish-quiet
+          npx cucumber-js --require-module @babel/register --require tests/steps/**/*.js
         continue-on-error: true
 
       # Step 6: Generate Allure Report
