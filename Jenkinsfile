@@ -16,7 +16,7 @@ pipeline {
     PW_ENV = 'qa'
     // propagate selected browser and headless flag into the environment for test code to consume
     BROWSER = "${params.BROWSER}"
-    HEADLESS = "${params.HEADLESS}"
+    HEADLESS = "true"
   }
 
   options {
@@ -39,6 +39,18 @@ pipeline {
             sh 'npm ci'
           } else {
             bat 'npm ci'
+          }
+        }
+      }
+    }
+
+    stage('Install Playwright Browsers') {
+      steps {
+        script {
+          if (isUnix()) {
+            sh 'npx playwright install --with-deps'
+          } else {
+            bat 'npx playwright install'
           }
         }
       }
