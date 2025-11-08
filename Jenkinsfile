@@ -56,6 +56,20 @@ pipeline {
       }
     }
 
+    stage('Clean old reports') {
+        steps {
+            script {
+            if (isUnix()) {
+                sh 'rm -rf reports allure-results'
+            } else {
+                bat 'if exist reports (rmdir /s /q reports)'
+                bat 'if exist allure-results (rmdir /s /q allure-results)'
+            }
+            echo '🧹 Old reports and allure-results cleaned.'
+            }
+        }
+        }
+
     stage('Run tests (Cucumber)') {
       steps {
         script {
