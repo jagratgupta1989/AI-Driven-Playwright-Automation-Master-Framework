@@ -29,7 +29,20 @@ async function launchBrowser(options = {}) {
   const env = process.env.PW_ENV || 'prod';
   const project = (baseConfig.projects || []).find(p => p.name === env) || baseConfig.projects[0];
   const browserName = options.browserName || process.env.BROWSER || (project && project.use && project.use.browserName) || 'chromium';
-  const headless = options.headless !== undefined ? options.headless : (baseConfig.use && baseConfig.use.headless !== undefined ? baseConfig.use.headless : false);
+  // Determine headless: priority options > env var HEADLESS > project.use > baseConfig.use > default false
+  let headless;
+  if (options.headless !== undefined) {
+    headless = options.headless;
+  } else if (process.env.HEADLESS !== undefined) {
+    const envHeadless = process.env.HEADLESS.toString().toLowerCase();
+    headless = (envHeadless === 'true' || envHeadless === '1');
+  } else if (project && project.use && project.use.headless !== undefined) {
+    headless = project.use.headless;
+  } else if (baseConfig.use && baseConfig.use.headless !== undefined) {
+    headless = baseConfig.use.headless;
+  } else {
+    headless = false;
+  }
   const timeout = options.timeout !== undefined ? options.timeout : (baseConfig.timeout || 10000);
   let browser;
   // Launch the selected browser

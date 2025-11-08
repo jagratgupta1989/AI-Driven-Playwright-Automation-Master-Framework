@@ -6,11 +6,17 @@
 pipeline {
   agent any
 
+  parameters {
+    choice(name: 'BROWSER', choices: ['chromium', 'chrome', 'firefox', 'webkit'], description: 'Browser to run tests')
+    booleanParam(name: 'HEADLESS', defaultValue: true, description: 'Run tests headless?')
+  }
+
   environment {
-    // run tests against QA environment
+    // run tests against QA environment by default, can be overridden via job parameters
     PW_ENV = 'qa'
-    // ensure node version in Jenkins agent matches repo engines (>=18 <22)
-    // If you manage multiple node installations in Jenkins, configure a NodeJS tool and set NODE_HOME accordingly here.
+    // propagate selected browser and headless flag into the environment for test code to consume
+    BROWSER = "${params.BROWSER}"
+    HEADLESS = "${params.HEADLESS}"
   }
 
   options {
@@ -67,7 +73,7 @@ pipeline {
           if (isUnix()) {
             sh 'node ./utils/reporter.js'
           } else {
-            bat 'node .\utils\reporter.js'
+            bat 'node ./utils/reporter.js'
           }
         }
       }
@@ -81,6 +87,24 @@ pipeline {
             sh 'npx allure generate allure-results -o reports/allure-report --clean || true'
           } else {
             bat 'npx allure generate allure-results -o reports/allure-report --clean || exit 0'
+          }
+        }
+      }
+    }
+
+    stage('Publish Allure Report') {
+      when {
+        expression { fileExists('allure-results') }
+      }
+      steps {
+        script {
+          echo 'Publishing Allure results to Jenkins Allure plugin...'
+          // The `allure` step is provided by the Jenkins Allure Plugin. This step will publish results collected in allure-results.
+          // If the plugin is not installed, this will fail — install the plugin or skip this stage.
+          if (fileExists('allure-results')) {
+            allure includeProperties: true, jdk: '', results: [[path: 'allure-results']]
+          } else {
+            echo 'No allure-results directory found; skipping Allure publish.'
           }
         }
       }
