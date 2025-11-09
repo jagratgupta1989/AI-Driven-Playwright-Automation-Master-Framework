@@ -3,13 +3,13 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * Generate cucumber HTML report from `reports/cucumber-report.json`.
- * Safe for both local and CI runs (prevents browser launch in CI).
+ * Generate cucumber HTML report safely for both local and CI environments.
  */
 function generateCucumberReport() {
   let envName = (process.env.PW_ENV || 'staging').toString();
   let browserName = (process.env.BROWSER || 'Chromium').toString();
 
+  // Try reading Allure environment details if present
   try {
     const envFile = path.resolve(__dirname, '../allure-results/environment.properties');
     if (fs.existsSync(envFile)) {
@@ -25,7 +25,7 @@ function generateCucumberReport() {
       });
     }
   } catch (e) {
-    // ignore and use env vars
+    // ignore
   }
 
   const options = {
@@ -33,7 +33,7 @@ function generateCucumberReport() {
     jsonFile: './reports/cucumber-report.json',
     output: './reports/cucumber-report.html',
     reportSuiteAsScenarios: true,
-    launchReport: false, // ✅ ensures no auto-browser open
+    launchReport: !process.env.CI, // 🚀 only launch locally
     metadata: {
       'App Version': '1.0.0',
       'Test Environment': envName.toString().toUpperCase(),
@@ -45,14 +45,23 @@ function generateCucumberReport() {
   };
 
   try {
-    reporter.generate(options);
+    // 🔥 Prevent auto-open in CI by monkey-patching reporter internals
+    if (process.env.CI) {
+      const open = require('open');
+      const originalOpen = open;
+      require('open') = () => Promise.resolve(); // disable auto open
+      reporter.generate(options);
+      require('open') = originalOpen; // restore
+    } else {
+      reporter.generate(options);
+    }
+
     console.log('✅ Cucumber HTML report generated successfully.');
   } catch (err) {
     console.error('❌ Failed to generate cucumber HTML report:', err.message || err);
   }
 }
 
-// Only generate immediately if explicitly invoked
 if (require.main === module) {
   console.log('Generating Cucumber HTML report...');
   generateCucumberReport();
