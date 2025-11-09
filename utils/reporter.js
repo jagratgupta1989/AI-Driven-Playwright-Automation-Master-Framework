@@ -1,5 +1,4 @@
 const reporter = require('cucumber-html-reporter');
-
 const fs = require('fs');
 const path = require('path');
 
@@ -8,9 +7,13 @@ const path = require('path');
  * This function is idempotent and safe to call multiple times.
  */
 function generateCucumberReport() {
+  // Detect if running in CI (like GitHub Actions)
+  const isCI = process.env.CI === 'true';
+
   // Prefer environment.properties (Allure) if present to keep reports consistent.
   let envName = (process.env.PW_ENV || 'staging').toString();
   let browserName = (process.env.BROWSER || 'Chromium').toString();
+
   try {
     const envFile = path.resolve(__dirname, '../allure-results/environment.properties');
     if (fs.existsSync(envFile)) {
@@ -34,22 +37,24 @@ function generateCucumberReport() {
     jsonFile: './reports/cucumber-report.json',
     output: './reports/cucumber-report.html',
     reportSuiteAsScenarios: true,
-    launchReport: false,
+
+    // ✅ only launch locally, never in CI (prevents Chrome error)
+    launchReport: !isCI,
+
     metadata: {
       'App Version': '1.0.0',
       'Test Environment': envName.toString().toUpperCase(),
       'Browser': browserName,
       'Platform': process.platform,
       'Parallel': 'Scenarios',
-      'Executed': 'Local'
+      'Executed': isCI ? 'CI (GitHub Actions)' : 'Local'
     }
   };
 
   try {
     reporter.generate(options);
+    console.log(`Cucumber HTML report generated successfully: ${options.output}`);
   } catch (err) {
-    // If report generation fails, log and continue; callers may handle errors.
-    // Avoid throwing to not break consumers that call this function post-run.
     console.error('Failed to generate cucumber HTML report:', err && err.message ? err.message : err);
   }
 }
