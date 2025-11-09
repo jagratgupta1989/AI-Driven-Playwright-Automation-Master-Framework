@@ -4,13 +4,9 @@ const path = require('path');
 
 /**
  * Generate cucumber HTML report from `reports/cucumber-report.json`.
- * This function is idempotent and safe to call multiple times.
+ * Safe for both local and CI runs (prevents browser launch in CI).
  */
 function generateCucumberReport() {
-  // Detect if running in CI (like GitHub Actions)
-  const isCI = process.env.CI === 'true';
-
-  // Prefer environment.properties (Allure) if present to keep reports consistent.
   let envName = (process.env.PW_ENV || 'staging').toString();
   let browserName = (process.env.BROWSER || 'Chromium').toString();
 
@@ -37,31 +33,29 @@ function generateCucumberReport() {
     jsonFile: './reports/cucumber-report.json',
     output: './reports/cucumber-report.html',
     reportSuiteAsScenarios: true,
-
-    // ✅ only launch locally, never in CI (prevents Chrome error)
-    launchReport: !isCI,
-
+    launchReport: false, // ✅ ensures no auto-browser open
     metadata: {
       'App Version': '1.0.0',
       'Test Environment': envName.toString().toUpperCase(),
       'Browser': browserName,
       'Platform': process.platform,
       'Parallel': 'Scenarios',
-      'Executed': isCI ? 'CI (GitHub Actions)' : 'Local'
-    }
+      'Executed': process.env.CI ? 'CI/CD Pipeline' : 'Local',
+    },
   };
 
   try {
     reporter.generate(options);
-    console.log(`Cucumber HTML report generated successfully: ${options.output}`);
+    console.log('✅ Cucumber HTML report generated successfully.');
   } catch (err) {
-    console.error('Failed to generate cucumber HTML report:', err && err.message ? err.message : err);
+    console.error('❌ Failed to generate cucumber HTML report:', err.message || err);
   }
 }
 
-module.exports = { generateCucumberReport };
-
-// If invoked directly (node utils/reporter.js), generate report immediately.
+// Only generate immediately if explicitly invoked
 if (require.main === module) {
+  console.log('Generating Cucumber HTML report...');
   generateCucumberReport();
 }
+
+module.exports = { generateCucumberReport };

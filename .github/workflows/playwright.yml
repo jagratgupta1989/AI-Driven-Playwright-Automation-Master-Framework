@@ -41,12 +41,16 @@ jobs:
           npx cucumber-js --require-module @babel/register --require tests/steps/**/*.js
         continue-on-error: true
 
-      # Step 6: Generate Allure Report
+      # Step 6: Generate HTML Report
+      - name: Generate HTML Report
+        run: node utils/reporter.js
+
+      # Step 7: Generate Allure Report
       - name: Generate Allure Report
         if: always()
         run: npx allure generate ./allure-results --clean -o ./allure-report
 
-      # Step 7: Upload Allure Report as Artifact
+      # Step 8: Upload Allure Report as Artifact
       - name: Upload Allure Report
         if: always()
         uses: actions/upload-artifact@v4
@@ -54,7 +58,7 @@ jobs:
           name: allure-report
           path: allure-report
 
-      # Step 8: Upload Raw Cucumber JSON Results
+      # Step 9: Upload Raw Cucumber JSON Results
       - name: Upload Cucumber JSON results
         if: always()
         uses: actions/upload-artifact@v4
@@ -62,7 +66,7 @@ jobs:
           name: cucumber-json
           path: cucumber-report.json
 
-      # Step 9: Deploy Allure Report to GitHub Pages
+      # Step 10: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
