@@ -10,6 +10,10 @@
     "node": ">=18 <22"
   },
   "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/register": "^7.28.3",
     "@cucumber/cucumber": "^12.2.0",
     "@playwright/test": "^1.56.0",
     "allure-commandline": "^2.13.9",
